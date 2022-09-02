@@ -1,0 +1,15 @@
+{% extends 'inmobiliaria/base.html' %}
+
+{% block titulo %} Alquileres {% endblock  %}
+
+{% block encabezado1 %} 
+<h1 class="text-white font-weight-bold">Seccion alquileres</h1>
+{% endblock %}
+
+{% block contenido %}
+    {% for alquiler in alquileres %}
+        <p>{{ alquiler.tipo_de_operacion }}, {{ alquiler.precio }}, 
+            {{ alquiler.cantidad_ambientes }}, {{ alquiler.cantidad_dormitorios }}, {{ alquiler.descripcion }}</p>
+    {% endfor  %}
+{% endblock  %}
+
