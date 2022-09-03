@@ -13,3 +13,32 @@
     {% endfor  %}
 {% endblock  %}
 
+{% block productos %} 
+    {% for inmueble in inmuebles %}
+
+            <div class="col mb-5">
+                <div class="card h-100">
+                    <!-- Sale badge-->
+                   
+                    <!-- Product image-->
+                    <img class="card-img-fluid" width = "300px" src="https://tse1.mm.bing.net/th?id=OIP.5nhMh0I9yHmQh-nYWu0zWgHaFj&pid=Api&P=0" alt="..." />
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-fluid">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">Disponible para: {{inmueble.tipo_de_operacion}}</h5>
+                          
+                            <!-- Product price-->
+                            
+                            ${{inmueble.precio}}
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                        <div class="text-fluid"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                    </div>
+                </div>
+            </div>
+    {% endfor %}
+{% endblock %}
+

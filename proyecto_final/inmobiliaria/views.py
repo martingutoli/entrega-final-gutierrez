@@ -7,17 +7,22 @@ from inmobiliaria.models import Alquileres, Ventas
 # Create your views here.
 
 def inicio(request):
-    return render (request, "inmobiliaria/index.html")
+
+    listado_inmuebles = Alquileres.objects.all()
+
+    return render (request, "inmobiliaria/index.html", {"inmuebles": listado_inmuebles})
 
 def alquileres(request):
-    alquileres = Alquileres.objects.all()
-    context = {
-        "alquileres": alquileres
-    }
-    return render (request, "inmobiliaria/alquileres.html", context)
+   
+    listado_inmuebles = Alquileres.objects.filter(tipo_de_operacion = 'Alquiler')
+
+    return render (request, "inmobiliaria/alquileres.html", {"inmuebles": listado_inmuebles})
 
 def ventas(request):
-    return render(request, "inmobiliaria/ventas.html")
+
+    listado_inmuebles = Ventas.objects.filter(tipo_de_operacion = 'Venta')
+
+    return render(request, "inmobiliaria/ventas.html", {"inmuebles": listado_inmuebles})
 
 def about(request):
     return render(request, "inmobiliaria/about.html")
