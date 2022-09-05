@@ -2,8 +2,11 @@ from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from inmobiliaria.models import Alquileres, Ventas
-from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm
+from inmobiliaria.forms import UserCustomCreationForm
 from django.contrib.auth import login, logout, authenticate
+from django.contrib.auth.models import User
+
 
 # Create your views here.
 
@@ -81,10 +84,10 @@ def iniciar_sesion(request):
 def registrar(request):
 
     if request.method == "GET":
-        formulario = UserCreationForm()
-        return render(request, 'inmobiliaria/registro.html', {"form": formulario})
+        formulario = UserCustomCreationForm()
+        return render(request, "inmobiliaria/registro.html", {"form": formulario})
     else:
-        formulario = UserCreationForm(request.POST)
+        formulario = UserCustomCreationForm(request.POST)
         if formulario.is_valid():
             formulario.save()
             return redirect("inicio")

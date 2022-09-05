@@ -1,6 +1,5 @@
 {% extends 'inmobiliaria/base.html' %}
-
-{% block titulo %} Inicio {% endblock  %}
+´'0{% block titulo %} Inicio {% endblock  %}
 
 {% block encabezado1 %} 
 <h1 class="text-white font-weight-bold">Madre Bienes Raices</h1>
@@ -18,10 +17,13 @@
     </form>
     
    
+{% if user.is_authenticated %}
+    Bienvenido {{ user.username }}
+{% else %}
+    Usuario no registrado
+{% endif %}
 
-
-
-    
+-+*    
     
 </body>
 
