@@ -7,13 +7,16 @@
     <title>Document</title>
 </head>
 <body>
-    <form method="get">
+    <form action= "{% url 'resultado_busqueda' %}" method="get">
         <p>
-            indique
-
+            <input type="text" name="descripcion">
+            <input type="submit" value="Buscar">
         </p>
-
     </form>
+
+
+
+    
     
 </body>
 </html>

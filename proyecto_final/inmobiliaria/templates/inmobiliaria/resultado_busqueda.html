@@ -1,0 +1,12 @@
+{% extends 'inmobiliaria/base.html' %}
+
+{% block encabezado1 %} 
+
+    <h1>Resultado</h1>
+
+    {% for inmueble in inmuebles %}
+        <p> Tipo de operacion: {{inmueble.tipo_de_operacion}}, Precio: ${{inmueble.precio}}, Cant. de ambientes: {{inmueble.cantidad_ambientes}},
+             Cant de dormitorios: {{inmueble.cantidad_dormitorios}}, Descripcion: {{inmueble.descripcion}} </p>
+    {% endfor %}
+
+{% endblock %}

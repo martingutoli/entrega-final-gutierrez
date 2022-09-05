@@ -8,6 +8,23 @@
 
 {% block encabezado2 %} 
 <p class="text-white-75 mb-5">Nuestro objetivo es buscar lo mejor para tu tranquilidad</p>
+
+<body>
+    <form action= "{% url 'resultado_busqueda' %}" method="get">
+        <p>
+            <input type="text" name="descripcion">
+            <input type="submit" value="Buscar">
+        </p>
+    </form>
+    
+   
+
+
+
+    
+    
+</body>
+
 {% endblock %}
 
 {% block productos %} 
