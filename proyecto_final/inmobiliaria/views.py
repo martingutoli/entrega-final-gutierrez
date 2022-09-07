@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from inmobiliaria.models import Alquileres, Ventas
 from django.contrib.auth.forms import AuthenticationForm
-from inmobiliaria.forms import UserCustomCreationForm
+from inmobiliaria.forms import UserCustomCreationForm, UserCreationForm, UserEditForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
@@ -16,6 +17,7 @@ def inicio(request):
 
     return render (request, "inmobiliaria/index.html", {"inmuebles": listado_inmuebles})
 
+#@login_required
 def alquileres(request):
    
     listado_inmuebles = Alquileres.objects.filter(tipo_de_operacion = 'Alquiler')
@@ -93,3 +95,24 @@ def registrar(request):
             return redirect("inicio")
         else:
             return render(request, "inmobiliaria/registro.html", {"form": formulario, "error": "Formulario no valido"})
+
+@login_required
+def editar_usuario(request):
+    if request.method == "GET":
+        form = UserEditForm(initial={"email": request.user.email,"first_name": request.user.first_name, "last_name": request.user.last_name})
+        return render(request, "inmobiliaria/editar_usuario.html", {"form": form})
+
+    else:
+        form = UserEditForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            usuario = request.user
+
+            usuario.email = data["email"]
+            usuario.password1 = data["password1"]
+            usuario.password2 = data["password2"]
+
+            usuario.save()
+            return redirect('inicio')
+        else:
+            return render(request, 'inmobiliaria/editar_usuario.html', {"form" : form})

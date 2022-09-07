@@ -11,6 +11,8 @@ urlpatterns =[
     path("resultados/", buscar, name = "resultado_busqueda"),
     path("login/", iniciar_sesion, name = "login"),
     path("registro/", registrar, name = "registro"),
-    path("logout/", LogoutView.as_view(template_name = "inmobiliaria/logout.html"), name = "logout")
+    path("logout/", LogoutView.as_view(template_name = "inmobiliaria/logout.html"), name = "logout"),
+    path("editar/", editar_usuario, name = "editar"),
+
 
 ]
