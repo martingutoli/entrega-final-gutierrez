@@ -27,10 +27,15 @@
                         <div class="text-fluid">
                             <!-- Product name-->
                             <h5 class="fw-bolder">Disponible para: {{inmueble.tipo_de_operacion}}</h5>
+                                
                           
                             <!-- Product price-->
                             
                             ${{inmueble.precio}}
+                            {% if request.user.is_authenticated %}
+                            <a href="{%url 'borrar_inmueble' inmueble.id %}">Borrar</a> 
+                            <a href="{%url 'editar_inmueble' inmueble.id %}">Editar</a> 
+                            {% endif %}
                         </div>
                     </div>
                     <!-- Product actions-->
@@ -40,5 +45,8 @@
                 </div>
             </div>
     {% endfor %}
+
+
+
 {% endblock %}
 

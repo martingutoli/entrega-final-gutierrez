@@ -6,6 +6,13 @@
 <h1 class="text-white font-weight-bold">Seccion ventas</h1>
 {% endblock %}
 
+{% block contenido %}
+    {% for venta in ventas %}
+        <p>{{ venta.tipo_de_operacion }}, {{ venta.precio }}, 
+            {{ venta.cantidad_ambientes }}, {{ venta.cantidad_dormitorios }}, {{ venta.descripcion }}</p>
+    {% endfor  %}
+{% endblock  %}
+
 {% block productos %} 
     {% for inmueble in inmuebles %}
 
@@ -24,6 +31,10 @@
                             <!-- Product price-->
                             
                             ${{inmueble.precio}}
+                            {% if request.user.is_authenticated %}
+                            <a href="{%url 'borrar_inmueble' inmueble.id %}">Borrar</a> 
+                            <a href="{%url 'editar_inmueble' inmueble.id %}">Editar</a> 
+                            {% endif %}
                         </div>
                     </div>
                     <!-- Product actions-->

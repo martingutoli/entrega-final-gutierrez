@@ -13,6 +13,9 @@ urlpatterns =[
     path("registro/", registrar, name = "registro"),
     path("logout/", LogoutView.as_view(template_name = "inmobiliaria/logout.html"), name = "logout"),
     path("editar/", editar_usuario, name = "editar"),
-
-
+    path("crear_inmueble/", crear_inmueble, name = "crear_inmueble"),
+    path("crear_inmueble2/", crear_inmueble2, name = "crear_inmueble"),
+    path("borrar_inmueble/<id_inmueble>", borrar_inmueble, name = "borrar_inmueble"),
+    path("editar_inmueble/<id_inmueble>", editar_inmueble, name = "editar_inmueble"),
+    path("alquileres", AlquileresDetail.as_view(), name="alquileres"),
 ]

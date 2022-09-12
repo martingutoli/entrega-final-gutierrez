@@ -15,14 +15,14 @@ class UserCustomCreationForm(UserCreationForm):
         help_texts = { "username": "Solo minusculas, entre 6 y 15 caracteres", "email": "", "password1": "", "password2": "" }
 
 class UserEditForm(UserCreationForm):
-    email = EmailField()
-    password1 = CharField(label="Contraseña", widget=PasswordInput)
+    email = EmailField(label="Correo nuevo")
+    password1 = CharField(label="Password nuevo", widget=PasswordInput)
     password2 = CharField(label="Confirmar contraseña", widget=PasswordInput)
 
     class Meta:
         model = User
-        fields = ["username", "email", "password1", "password2"]
-        help_texts = { "username": "Solo minusculas, entre 6 y 15 caracteres", "email": "", "password1": "", "password2": "" }
+        fields = ["email", "password1", "password2"]
+        help_texts = { "email": "", "password1": "", "password2": "" }
 
 class AlquileresFormulario(Form):
     tipo_de_operacion = CharField()

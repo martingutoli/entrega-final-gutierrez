@@ -31,14 +31,25 @@
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         
                         <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                        {% if not request.user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'alquileres' %}">Alquileres</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'ventas' %}">Ventas</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Ingreso Admin</a></li>
+                        {% else %}
+                        
+                        <li class="nav-item"><a class="nav-link" href="{% url 'alquileres' %}">Alquileres</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'ventas' %}">Ventas</a></li>
+                        
                         <li class="nav-item"><a class="nav-link" href="{% url 'registro' %}">Crear cuenta</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Cerrar sesion</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'crear_inmueble' %}">Agregar inmueble</a></li>
+                        
+                        {% endif %}
                         
                     </ul>
+                 
                 </div>
+               
             </div>
         </nav>
        
@@ -46,6 +57,11 @@
         <!-- Masthead-->
         <header class="masthead">
             <div class="container px-4 px-lg-10 h-100">
+               
+                {% if user.is_authenticated %}
+                    <p style="color: white; font-size: 22px;font-weight: 100px;"> Bienvenido {{ user.username }}
+                   
+                {% endif %}
                 <div class="row gx-4 gx-lg-10 h-100 align-items-center justify-content-center text-center">
                     <div class="col-lg-8 align-self-end">
                         {% block encabezado1 %} 
