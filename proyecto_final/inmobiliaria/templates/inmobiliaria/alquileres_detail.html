@@ -1,14 +1,15 @@
-{% extends 'coder/base.html' %}
+{% extends 'inmobiliaria/base.html' %}
 
 
 
-{% block productos %}
+{% block contenido %}
 
-    <p>tipo_de_operacion: {{inmueble.tipo_de_operacion}}</p>
-    <p>precio: {{inmueble.precio}}</p>
-    <p>cantidad_ambientes: {{inmueble.cantidad_ambientes}}</p>
-    <p>cantidad_dormitorios: {{inmueble.cantidad_dormitorios}}</p>
-    <p>descripcion: {{inmueble.descripcion}}</p>
+
+    <p>tipo_de_operacion: {{inmuebles.tipo_de_operacion}}</p>
+    <p>precio: ${{inmuebles.precio}}</p>
+    <p>cantidad_ambientes: {{inmuebles.cantidad_ambientes}}</p>
+    <p>cantidad_dormitorios: {{inmuebles.cantidad_dormitorios}}</p>
+    <p>descripcion: {{inmuebles.descripcion}}</p>
 
 
 {% endblock  %}

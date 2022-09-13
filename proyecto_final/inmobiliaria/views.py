@@ -1,9 +1,9 @@
 from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from inmobiliaria.models import Alquileres, Ventas #Avatar
+from inmobiliaria.models import Inmuebles #Alquileres, Ventas #Avatar
 from django.contrib.auth.forms import AuthenticationForm
-from inmobiliaria.forms import UserCustomCreationForm, UserCreationForm, UserEditForm, AlquileresFormulario
+from inmobiliaria.forms import UserCustomCreationForm, UserCreationForm, UserEditForm, InmueblesFormulario
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
@@ -21,20 +21,20 @@ def inicio(request):
      #   avatar = Avatar.objects.filter(usuario = request.user ).last()
       #  context.update({"avatar": avatar})
 
-    listado_inmuebles = Alquileres.objects.all()
+    listado_inmuebles = Inmuebles.objects.all()
 
     return render (request, "inmobiliaria/index.html", {"inmuebles": listado_inmuebles})
 
 #@login_required
 def alquileres(request):
    
-    listado_inmuebles = Alquileres.objects.filter(tipo_de_operacion = 'Alquiler')
+    listado_inmuebles = Inmuebles.objects.filter(tipo_de_operacion = 'Alquiler')
 
     return render (request, "inmobiliaria/alquileres.html", {"inmuebles": listado_inmuebles})
 
 def ventas(request):
 
-    listado_inmuebles = Ventas.objects.filter(tipo_de_operacion = 'Venta')
+    listado_inmuebles = Inmuebles.objects.filter(tipo_de_operacion = 'Venta')
 
     return render(request, "inmobiliaria/ventas.html", {"inmuebles": listado_inmuebles})
 
@@ -49,7 +49,7 @@ def buscar (request):
 
     if not inmueble_tipo:
         return HttpResponse ("No indicaste nada")
-    inmuebles_lista = Alquileres.objects.filter(descripcion__icontains=inmueble_tipo)
+    inmuebles_lista = Inmuebles.objects.filter(descripcion__icontains=inmueble_tipo)
     return render(request, "inmobiliaria/resultado_busqueda.html", {"inmuebles": inmuebles_lista})
 
 def iniciar_sesion(request):
@@ -135,55 +135,55 @@ def crear_inmueble(request):
         cantidad_ambientes = request.POST["cantidad_ambientes"]
         cantidad_dormitorios = request.POST["cantidad_dormitorios"]
         descripcion = request.POST["descripcion"]
-        inmueble = Alquileres(tipo_de_operacion = tipo_de_operacion, precio=precio, cantidad_ambientes=cantidad_ambientes, cantidad_dormitorios=cantidad_dormitorios, descripcion=descripcion)
+        inmueble = Inmuebles(tipo_de_operacion = tipo_de_operacion, precio=precio, cantidad_ambientes=cantidad_ambientes, cantidad_dormitorios=cantidad_dormitorios, descripcion=descripcion)
         inmueble.save()
         return render(request, "inmobiliaria/index.html")
 
-def crear_inmueble2(request):
-    if request.method == "GET":
-        return render(request, "inmobiliaria/crear_inmueble.html")
-    else:
-        tipo_de_operacion = request.POST["tipo_de_operacion"]
-        precio = request.POST["precio"]
-        cantidad_ambientes = request.POST["cantidad_ambientes"]
-        cantidad_dormitorios = request.POST["cantidad_dormitorios"]
-        descripcion = request.POST["descripcion"]
-        inmueble = Ventas(tipo_de_operacion = tipo_de_operacion, precio=precio, cantidad_ambientes=cantidad_ambientes, cantidad_dormitorios=cantidad_dormitorios, descripcion=descripcion)
-        inmueble.save()
-        return render(request, "inmobiliaria/index.html")
+#def crear_inmueble2(request):
+#    if request.method == "GET":
+ #       return render(request, "inmobiliaria/crear_inmueble.html")
+  #  else:
+   #     tipo_de_operacion = request.POST["tipo_de_operacion"]
+    #    precio = request.POST["precio"]
+     #   cantidad_ambientes = request.POST["cantidad_ambientes"]
+      #  cantidad_dormitorios = request.POST["cantidad_dormitorios"]
+       # descripcion = request.POST["descripcion"]
+        #inmueble = Ventas(tipo_de_operacion = tipo_de_operacion, precio=precio, cantidad_ambientes=cantidad_ambientes, cantidad_dormitorios=cantidad_dormitorios, descripcion=descripcion)
+        #inmueble.save()
+        #return render(request, "inmobiliaria/index.html")
 
 def borrar_inmueble(request, id_inmueble):
     try:
-        inmueble = Alquileres.objects.get(id=id_inmueble)
+        inmueble = Inmuebles.objects.get(id=id_inmueble)
         inmueble.delete()
-        return redirect("alquileres")
+        return redirect("inicio")
     except:
         return redirect("inicio")
 
-def borrar_inmueble2(request, id_inmueble):
-    try:
-        inmueble = Ventas.objects.get(id=id_inmueble)
-        inmueble.delete()
-        return redirect("ventas")
-    except:
-        return redirect("inicio")
+#def borrar_inmueble2(request, id_inmueble):
+ #   try:
+  #      inmueble = Ventas.objects.get(id=id_inmueble)
+   #     inmueble.delete()
+    #    return redirect("ventas")
+    #except:
+     #   return redirect("inicio")
 
 def editar_inmueble(request, id_inmueble):
     if request.method == "GET":
-        formulario = AlquileresFormulario()
+        formulario = InmueblesFormulario()
         contexto = {
 
             "formulario": formulario
         }
         return render(request, "inmobiliaria/crear_inmueble.html", contexto)
     else:
-        formulario =AlquileresFormulario(request.POST)
+        formulario =InmueblesFormulario(request.POST)
 
         if formulario.is_valid():
             data = formulario.cleaned_data
 
             try:
-                inmueble = Alquileres.objects.get(id=id_inmueble)
+                inmueble = Inmuebles.objects.get(id=id_inmueble)
 
                 inmueble.tipo_de_operacion = data.get("tipo_de_operacion")
                 inmueble.precio = data.get("precio")
@@ -195,8 +195,21 @@ def editar_inmueble(request, id_inmueble):
             except:
                 return HttpResponse("Error en la actualizacion")
             
-        return redirect("alquileres")
+        return redirect("inicio")
 
-class AlquileresDetail(DetailView):
-    model = Alquileres
+class InmueblesList( ListView):
+    model = Inmuebles
+    template_name = "inmobiliaria/inmuebles_list.html"
+
+    def alqui(request):
+        listado_inmuebles = Inmuebles.objects.filter(tipo_de_operacion = 'Alquiler')
+
+        return render (request, "inmobiliaria/alquileres.html", {"inmuebles": listado_inmuebles})
+
+        
+
+class InmueblesDetail(DetailView):
+    model = Inmuebles
     template_name = "inmobiliaria/alquileres_detail.html"
+
+    

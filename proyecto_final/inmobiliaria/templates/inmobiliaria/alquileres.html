@@ -7,10 +7,7 @@
 {% endblock %}
 
 {% block contenido %}
-    {% for alquiler in alquileres %}
-        <p>{{ alquiler.tipo_de_operacion }}, {{ alquiler.precio }}, 
-            {{ alquiler.cantidad_ambientes }}, {{ alquiler.cantidad_dormitorios }}, {{ alquiler.descripcion }}</p>
-    {% endfor  %}
+  
 {% endblock  %}
 
 {% block productos %} 
@@ -31,16 +28,20 @@
                           
                             <!-- Product price-->
                             
-                            ${{inmueble.precio}}
+                            Precio: ${{inmueble.precio}}
+                           
+                                
+                                <p>Cant. ambientes: {{ inmueble.cantidad_ambientes }}</p>
+                                <p>Cant. domritorios: {{ inmueble.cantidad_dormitorios }}</p>
+                                <p>Descripcion: {{ inmueble.descripcion }}</p>
+                            
                             {% if request.user.is_authenticated %}
                             <a href="{%url 'borrar_inmueble' inmueble.id %}">Borrar</a> 
                             <a href="{%url 'editar_inmueble' inmueble.id %}">Editar</a> 
                             {% endif %}
                         </div>
                     </div>
-                    <!-- Product actions-->
-                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-                        <div class="text-fluid"><a class="btn btn-outline-dark mt-auto" href="#">Add to cart</a></div>
+                   
                     </div>
                 </div>
             </div>

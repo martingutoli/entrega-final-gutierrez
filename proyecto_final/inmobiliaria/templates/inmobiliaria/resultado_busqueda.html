@@ -2,14 +2,13 @@
 
 {% block encabezado1 %} 
 
-    <h1>Resultado</h1>
+
 
     {% for inmueble in inmuebles %}
-        <p> Tipo de operacion: {{inmueble.tipo_de_operacion}} </p>
-        <p> Precio: ${{inmueble.precio}} </p>
-        <p> Cant. de ambientes: {{inmueble.cantidad_ambientes}} </p>
-        <p> Cant de dormitorios: {{inmueble.cantidad_dormitorios}} </p>
-        <p> Descripcion: {{inmueble.descripcion}} </p>
+    <p style="color: black; font-size: 22px;font-weight: 100px;"> <b><i><u>Resultado:</u></i></b>
+
+        <p style="color: black; font-size: 22px;font-weight: 100px;"> Tipo de operacion: {{inmueble.tipo_de_operacion}} / Precio: ${{inmueble.precio}} / Cant. de ambientes: {{inmueble.cantidad_ambientes}} / Cant de dormitorios: {{inmueble.cantidad_dormitorios}} / Descripcion: {{inmueble.descripcion}}
+        
     {% endfor %}
 
 {% endblock %}

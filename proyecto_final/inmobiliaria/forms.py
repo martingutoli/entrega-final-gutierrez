@@ -24,16 +24,16 @@ class UserEditForm(UserCreationForm):
         fields = ["email", "password1", "password2"]
         help_texts = { "email": "", "password1": "", "password2": "" }
 
-class AlquileresFormulario(Form):
+class InmueblesFormulario(Form):
     tipo_de_operacion = CharField()
     precio = IntegerField()
     cantidad_ambientes = IntegerField()
     cantidad_dormitorios = IntegerField()
     descripcion = CharField()
 
-class VentasFormulario(Form):
-    tipo_de_operacion = CharField()
-    precio = IntegerField()
-    cantidad_ambientes = IntegerField()
-    cantidad_dormitorios = IntegerField()
-    descripcion = CharField()
+#class VentasFormulario(Form):
+ #   tipo_de_operacion = CharField()
+  #  precio = IntegerField()
+   # cantidad_ambientes = IntegerField()
+   # cantidad_dormitorios = IntegerField()
+    #descripcion = CharField()
